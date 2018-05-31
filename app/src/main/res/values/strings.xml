@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyRetrofit</string>
+    <string name="input_username">Masukkan Username</string>
+    <string name="input_password">Masukkan Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+</resources>
