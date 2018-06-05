@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.neverstop_sharing.myretrofit.apihelper.LoginService;
-import com.neverstop_sharing.myretrofit.apihelper.LoginService;
+import com.neverstop_sharing.myretrofit.apihelper.AuthService;
 import com.neverstop_sharing.myretrofit.apihelper.UtilsApi;
 import com.neverstop_sharing.myretrofit.response.GetLogin;
 
@@ -39,14 +38,14 @@ public class LoginActivity extends AppCompatActivity{
     Button btnLogin,btnRegist;
     ProgressDialog loading;
     Context mContext;
-    LoginService loginService;
+    AuthService authService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-        loginService = UtilsApi.getAPIService();
+        authService = UtilsApi.getAPIService();
         initComponents();
     }
 
@@ -56,6 +55,7 @@ public class LoginActivity extends AppCompatActivity{
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         btnLogin = (Button)findViewById(R.id.btn_login);
+        btnRegist = (Button)findViewById(R.id.btn_regist);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,44 +63,22 @@ public class LoginActivity extends AppCompatActivity{
                 requestLogin();
             }
         });
-    }
 
-
-    /*private void requestLogin(){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL_API)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        String uname = edtUsername.getText().toString();
-        String paswd = edtPassword.getText().toString();
-        LoginService service = retrofit.create(LoginService.class);
-        Call<GetLogin> loginCall = service.loginRequest(uname,paswd);
-        loginCall.enqueue(new Callback<GetLogin>() {
+        btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<GetLogin> call, Response<GetLogin> response) {
-                if (response.isSuccessful()){
-                    loading.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetLogin> call, Throwable t) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
-    }*/
+    }
 
 
 
     private void requestLogin() {
         String uname = edtUsername.getText().toString();
         String paswd = edtPassword.getText().toString();
-        loginService.loginRequest(uname,paswd)
+        authService.loginRequest(uname,paswd)
                 .enqueue(new Callback<GetLogin>() {
                     @Override
                     public void onResponse(Call<GetLogin> call, Response<GetLogin> response) {

@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_margin_vertical"
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
     tools:context=".RegisterActivity">
+    <EditText
+        android:id="@+id/edtRegistUsername"
+        android:hint="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Password"
+        android:id="@+id/edtRegistPassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Birth Date"
+        android:id="@+id/edtRegistBirthdate"
+        android:layout_width="match_parent"
+        android:inputType="date"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Name"
+        android:id="@+id/edtRegistName"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Phone"
+        android:id="@+id/edtRegistPhone"
+        android:layout_width="match_parent"
+        android:inputType="phone"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Status"
+        android:id="@+id/edtRegistStatus"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Job"
+        android:id="@+id/edtRegistJob"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/rg_gender_register"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_regis_male"
+            android:text="Male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb_regis_female"
+            android:text="Female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <Button
+        android:text="Sign up"
+        android:id="@+id/btnRegisterSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
