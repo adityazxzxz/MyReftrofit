@@ -2,6 +2,7 @@ package com.neverstop_sharing.myretrofit;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -105,16 +106,24 @@ public class LoginActivity extends AppCompatActivity{
                     public void onResponse(Call<GetLogin> call, Response<GetLogin> response) {
                         GetLogin getLogin = response.body();
                         if(response.isSuccessful()){
-                            SharedPreferences sharedPreferences = getSharedPreferences("loginInfo",mContext.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("userid",getLogin.getData().getId());
-                            editor.putString("usertoken",getLogin.getData().getAuthToken());
-                            editor.putString("username",getLogin.getData().getUsername());
-                            editor.putString("name",getLogin.getData().getName());
-                            loading.dismiss();
-                            Toast.makeText(mContext,"connected",Toast.LENGTH_SHORT).show();
-                            Log.d("debuging",getLogin.getMessage());
-                            Log.d("debuging",getLogin.getData().getAuthToken());
+                            Log.d("debuging","connected");
+                            if(!getLogin.getError()){
+                                SharedPreferences sharedPreferences = getSharedPreferences("loginInfo",mContext.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("userid",getLogin.getData().getId());
+                                editor.putString("usertoken",getLogin.getData().getAuthToken());
+                                editor.putString("username",getLogin.getData().getUsername());
+                                editor.putString("name",getLogin.getData().getName());
+                                loading.dismiss();
+                                Log.d("debuging",getLogin.getMessage());
+                                Log.d("debuging",getLogin.getData().getAuthToken());
+                                Intent intent = new Intent(LoginActivity.this,MainMenuActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                loading.dismiss();
+                                Toast.makeText(mContext,getLogin.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
